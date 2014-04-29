@@ -8,4 +8,8 @@ class Board
   def rows
     grid.each_slice(3).to_a
   end
+
+  def columns
+    rows.transpose
+  end
 end
