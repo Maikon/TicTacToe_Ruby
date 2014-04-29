@@ -17,6 +17,14 @@ class Board
     [] << left << right
   end
 
+  def edges
+    [grid[1], grid[3], grid[5], grid[7]]
+  end
+
+  def winning_combinations
+    rows + columns + diagonals
+  end
+
   private
 
   def left

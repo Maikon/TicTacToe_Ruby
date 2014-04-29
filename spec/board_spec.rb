@@ -31,4 +31,18 @@ describe Board do
                                      [3, 5, 7]]
     end
   end
+
+  context '#edges' do
+    it 'returns the edges' do
+      expect(board.edges).to eq [2, 4, 6, 8]
+    end
+  end
+
+  context '#winning_combinations' do
+    it 'returns the winning combinations' do
+      expect(board.winning_combinations).to eq board.rows +
+                                               board.columns +
+                                               board.diagonals
+    end
+  end
 end
