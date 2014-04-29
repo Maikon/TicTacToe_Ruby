@@ -24,4 +24,11 @@ describe Board do
                                    [3, 6, 9]]
     end
   end
+
+  context '#diagonals' do
+    it 'returns the diagonals' do
+      expect(board.diagonals).to eq [[1, 5, 9],
+                                     [3, 5, 7]]
+    end
+  end
 end
