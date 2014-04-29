@@ -4,4 +4,8 @@ class Board
   def initialize
     @grid = (1..9).to_a
   end
+
+  def rows
+    grid.each_slice(3).to_a
+  end
 end

@@ -8,4 +8,12 @@ describe Board do
                               4, 5, 6,
                               7, 8, 9]
   end
+
+  context '#rows' do
+    it 'returns the rows' do
+      expect(board.rows).to eq [[1, 2, 3],
+                                [4, 5, 6],
+                                [7, 8, 9]]
+    end
+  end
 end
