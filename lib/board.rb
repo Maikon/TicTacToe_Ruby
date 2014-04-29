@@ -25,6 +25,10 @@ class Board
     rows + columns + diagonals
   end
 
+  def set_value_for(position, value)
+    grid.include?(position) ? grid[position - 1] = value : false
+  end
+
   private
 
   def left

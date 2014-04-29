@@ -45,4 +45,21 @@ describe Board do
                                                board.diagonals
     end
   end
+
+  context '#set_value_for' do
+    it 'sets the value of the given cell' do
+      board.set_value_for(1, 'X')
+      expect(board.grid).to eq ['X', 2, 3,
+                                4, 5, 6,
+                                7, 8, 9]
+    end
+
+    it 'returns false if cell is not free' do
+      board.set_value_for(1, 'X')
+      expect(board.grid).to eq ['X', 2, 3,
+                                4, 5, 6,
+                                7, 8, 9]
+      expect(board.set_value_for(1, 'O')).to eq false
+    end
+  end
 end
