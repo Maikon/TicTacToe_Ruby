@@ -1,4 +1,5 @@
 require 'board'
+require 'spec_helper'
 
 describe Board do
   let(:board) { Board.new }
@@ -60,6 +61,19 @@ describe Board do
                                 4, 5, 6,
                                 7, 8, 9]
       expect(board.set_value_for(1, 'O')).to eq false
+    end
+  end
+
+  context '#available_moves' do
+    it 'returns the available moves' do
+      board.set_value_for(1, 'X')
+      board.set_value_for(5, 'O')
+      expect(board.available_moves).to eq [2, 3, 4, 6, 7, 8, 9]
+    end
+
+    it 'returns empty array otherwise' do
+      full_board_draw
+      expect(board.available_moves).to eq []
     end
   end
 end

@@ -29,6 +29,10 @@ class Board
     grid.include?(position) ? grid[position - 1] = value : false
   end
 
+  def available_moves
+    grid.grep(Fixnum)
+  end
+
   private
 
   def left
