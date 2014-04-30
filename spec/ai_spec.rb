@@ -73,4 +73,12 @@ describe Ai do
     end
   end
 
+  context '#mark_winning_spot' do
+    it 'marks the winning spot in a winning combination' do
+      fill_cell(1, player_1.mark)
+      fill_cell(9, player_1.mark)
+      expect(board).to receive(:set_value_for).with(5, 'O')
+      ai.mark_winning_spot
+    end
+  end
 end
