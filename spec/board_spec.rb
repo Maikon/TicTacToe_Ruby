@@ -84,4 +84,10 @@ describe Board do
     end
   end
 
+  context '#draw?' do
+    it 'returns true if there are no moves left' do
+      full_board_draw
+      expect(board.draw?).to eq true
+    end
+  end
 end

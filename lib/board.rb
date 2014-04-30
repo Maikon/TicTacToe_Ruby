@@ -37,6 +37,10 @@ class Board
     winning_combinations.any? { |combo| combo.all? { |cell| cell == combo.first } }
   end
 
+  def draw?
+    available_moves.empty?
+  end
+
   private
 
   def left
