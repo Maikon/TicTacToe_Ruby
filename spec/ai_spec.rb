@@ -64,4 +64,13 @@ describe Ai do
       expect(ai.alternative_diagonal_trap_being_set?).to eq true
     end
   end
+
+  context '#opportunity_to_set_trap_exists?' do
+    it 'returns true if trap can be set against opponent' do
+      fill_cell(1, player_1.mark)
+      fill_cell(9, player_2.mark)
+      expect(ai.opportunity_to_set_trap_exists?).to eq true
+    end
+  end
+
 end

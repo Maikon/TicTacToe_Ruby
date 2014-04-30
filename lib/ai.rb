@@ -23,6 +23,10 @@ class Ai
     check_alternative_diagonal_formation(opponent)
   end
 
+  def opportunity_to_set_trap_exists?
+    board.diagonals.any? { |d| d.count(opponent) == 1 }
+  end
+
   end
 
   private
