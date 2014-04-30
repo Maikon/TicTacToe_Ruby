@@ -9,6 +9,10 @@ class Ai
     check_for(player_1)
   end
 
+  def board_center_available?
+    board.available_moves.include?(5)
+  end
+
   private
 
   def board
