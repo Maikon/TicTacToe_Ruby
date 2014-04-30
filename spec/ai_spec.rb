@@ -21,7 +21,7 @@ describe Ai do
   end
 
   context '#winning_spot_available?' do
-    it 'returns true if a winning spot exists' do
+    it 'returns winning spot if one exists' do
       fill_cell(1, player_1.mark)
       fill_cell(3, player_1.mark)
       expect(ai.winning_spot_available?).to eq true
@@ -52,6 +52,16 @@ describe Ai do
       expect(ai.diagonal_trap_being_set?).to eq false
       fill_cell(5, player_2.mark)
       expect(ai.diagonal_trap_being_set?).to eq true
+    end
+  end
+
+  context '#alternative_diagonal_trap_being_set?' do
+    it 'returns true if the opponent can set an alternative diagonal trap' do
+      fill_cell(1, player_2.mark)
+      fill_cell(5, player_1.mark)
+      expect(ai.alternative_diagonal_trap_being_set?).to eq false
+      fill_cell(9, player_2.mark)
+      expect(ai.alternative_diagonal_trap_being_set?).to eq true
     end
   end
 end
