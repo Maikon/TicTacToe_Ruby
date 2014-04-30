@@ -29,7 +29,7 @@ describe Board do
   context '#diagonals' do
     it 'returns the diagonals' do
       expect(board.diagonals).to eq [[1, 5, 9],
-                                     [3, 5, 7]]
+                                     [7, 5, 3]]
     end
   end
 
@@ -76,4 +76,12 @@ describe Board do
       expect(board.available_moves).to eq []
     end
   end
+
+  context '#winner?' do
+    it 'returns true if there is a winner' do
+      fill_top_row_with_x
+      expect(board.winner?).to eq true
+    end
+  end
+
 end

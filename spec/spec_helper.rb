@@ -9,3 +9,9 @@ def full_board_draw
   board.set_value_for(8, 'O')
   board.set_value_for(9, 'X')
 end
+
+def fill_top_row_with_x
+  board.set_value_for(1, 'X')
+  board.set_value_for(2, 'X')
+  board.set_value_for(3, 'X')
+end

@@ -33,6 +33,10 @@ class Board
     grid.grep(Fixnum)
   end
 
+  def winner?
+    winning_combinations.any? { |combo| combo.all? { |cell| cell == combo.first } }
+  end
+
   private
 
   def left
@@ -40,6 +44,6 @@ class Board
   end
 
   def right
-    rows.reverse.map.each_with_index { |row, index| row[index] }.sort
+    rows.reverse.map.each_with_index { |row, index| row[index] }
   end
 end
