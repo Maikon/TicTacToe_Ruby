@@ -13,6 +13,10 @@ class Ai
     board.available_moves.include?(5)
   end
 
+  def possible_loss?
+    check_for(player_2)
+  end
+
   private
 
   def board
@@ -21,6 +25,10 @@ class Ai
 
   def player_1
     interface.players[0].mark
+  end
+
+  def player_2
+    interface.players[1].mark
   end
 
   def check_for(player)

@@ -36,4 +36,13 @@ describe Ai do
     end
   end
 
+  context '#possible_loss?' do
+    it 'returns true if the opponent has a winning spot' do
+      fill_cell(1, player_2.mark)
+      fill_cell(5, player_1.mark)
+      fill_cell(3, player_2.mark)
+      expect(ai.possible_loss?).to eq true
+    end
+  end
+
 end
