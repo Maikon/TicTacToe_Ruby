@@ -15,3 +15,7 @@ def fill_top_row_with_x
   board.set_value_for(2, 'X')
   board.set_value_for(3, 'X')
 end
+
+def fill_cell(position, mark)
+  board.set_value_for(position, mark)
+end

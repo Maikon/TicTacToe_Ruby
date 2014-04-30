@@ -1,6 +1,7 @@
 require 'ai'
 require 'board'
 require 'game_interface'
+require 'spec_helper'
 
 describe Ai do
   let(:ai)             { Ai.new }
@@ -16,4 +17,12 @@ describe Ai do
     end
   end
 
+  context '#winning_spot_available?' do
+    it 'returns true if a winning spot exists' do
+      ai.choose_interface(game_interface)
+      fill_cell(1, player_1.mark)
+      fill_cell(3, player_1.mark)
+      expect(ai.winning_spot_available?).to eq true
+    end
+  end
 end
