@@ -45,4 +45,13 @@ describe Ai do
     end
   end
 
+  context '#diagonal_trap_being_set?' do
+    it 'returns true if the opponent can set a diagonal trap' do
+      fill_cell(1, player_2.mark)
+      fill_cell(9, player_1.mark)
+      expect(ai.diagonal_trap_being_set?).to eq false
+      fill_cell(5, player_2.mark)
+      expect(ai.diagonal_trap_being_set?).to eq true
+    end
+  end
 end

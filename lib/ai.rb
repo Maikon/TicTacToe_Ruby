@@ -17,6 +17,10 @@ class Ai
     check_for(player_2)
   end
 
+  def diagonal_trap_being_set?
+    check_diagonal_formation(player_2)
+  end
+
   private
 
   def board
@@ -35,5 +39,15 @@ class Ai
     board.winning_combinations.any? do |combo|
       combo.count(player) == 2 && combo.any? { |cell| cell.is_a? Fixnum }
     end
+  end
+
+  def check_diagonal_formation(player)
+    board.diagonals.any? do |d|
+      d.count(player) == 2 && !first_and_last_spot(d, player)
+    end
+  end
+
+  def first_and_last_spot(combo, player)
+    combo.first == player && combo.last == player
   end
 end
