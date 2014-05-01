@@ -53,6 +53,10 @@ class Ai
     board.set_value_for(diagonal_move.first, current_player)
   end
 
+  def mark_center
+    board.set_value_for(5, current_player)
+  end
+
   private
 
   def board

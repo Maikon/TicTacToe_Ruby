@@ -121,4 +121,12 @@ describe Ai do
     end
   end
 
+  context '#mark_center' do
+    it 'marks center of the board' do
+      fill_cell(1, opponent.mark)
+      expect(board).to receive(:set_value_for).with(5, 'O')
+      ai.mark_center
+    end
+  end
+
 end
