@@ -26,12 +26,12 @@ class Ai
   end
 
   def opportunity_to_set_trap_exists?
-     check_diagonal
+    check_diagonal
   end
 
   def mark_winning_spot
-   position = position_to_move_depends_on(current_player).first
-   board.set_value_for(position, current_player)
+    position = position_to_move_depends_on(current_player).first
+    board.set_value_for(position, current_player)
   end
 
   def block_opponent_winning_spot
@@ -69,11 +69,11 @@ class Ai
   end
 
   def current_player
-    interface.players[0].mark
+    interface.player.mark == 'X' ? 'O' : 'X'
   end
 
   def opponent
-    interface.players[1].mark
+    interface.player.mark
   end
 
   def check_diagonal_formation(player)

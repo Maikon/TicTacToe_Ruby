@@ -1,8 +1,8 @@
 class GameInterface
-  attr_reader :board, :players
+  attr_reader :board, :player
 
-  def initialize(board, *players)
+  def initialize(board, player)
     @board = board
-    @players = players
+    @player = player
   end
 end

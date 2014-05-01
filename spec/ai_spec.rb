@@ -8,7 +8,7 @@ describe Ai do
   let(:board)          { Board.new }
   let(:current_player)       { double :computer, mark: 'O' }
   let(:opponent)       { double :human, mark: 'X' }
-  let(:game_interface) { GameInterface.new(board, current_player, opponent) }
+  let(:game_interface) { GameInterface.new(board, opponent) }
 
   before(:each) do
     ai.choose_interface(game_interface)
