@@ -30,8 +30,8 @@ class Ai
   end
 
   def mark_winning_spot
-   move = position_to_move(current_player).first
-   board.set_value_for(move, current_player)
+   position = position_to_move(current_player).first
+   board.set_value_for(position, current_player)
   end
 
   private
