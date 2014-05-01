@@ -26,12 +26,17 @@ class Ai
   end
 
   def opportunity_to_set_trap_exists?
-    board.diagonals.any? { |d| d.count(opponent) == 1 }
+     check_diagonal
   end
 
   def mark_winning_spot
-   position = position_to_move(current_player).first
+   position = position_to_move_depends_on(current_player).first
    board.set_value_for(position, current_player)
+  end
+
+  def block_opponent_winning_spot
+    position = position_to_move_depends_on(opponent).first
+    board.set_value_for(position, current_player)
   end
 
   private
@@ -64,7 +69,7 @@ class Ai
     combo.first == player && combo.last == player
   end
 
-  def position_to_move(player)
+  def position_to_move_depends_on(player)
     option = board.winning_combinations.select do |combo|
       combo.count(player) == 2 && combo.any? { |cell| cell.is_a? Fixnum }
     end.flatten
@@ -72,6 +77,7 @@ class Ai
   end
 
   def move_available?(player)
-    position_to_move(player).empty? ? false : true
+    position_to_move_depends_on(player).empty? ? false : true
+  end
   end
 end

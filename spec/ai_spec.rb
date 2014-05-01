@@ -81,4 +81,15 @@ describe Ai do
       ai.mark_winning_spot
     end
   end
+
+  context '#block_opponent_winning_spot' do
+    it 'marks spot that can lead to opponent win' do
+      fill_cell(1, opponent.mark)
+      fill_cell(5, current_player.mark)
+      fill_cell(3, opponent.mark)
+      expect(board).to receive(:set_value_for).with(2, 'O')
+      ai.block_opponent_winning_spot
+    end
+  end
+
 end
