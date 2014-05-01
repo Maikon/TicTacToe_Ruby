@@ -44,6 +44,11 @@ class Ai
     board.set_value_for(position, current_player)
   end
 
+  def block_alternative_diagonal_trap
+    position = board.edges.first
+    board.set_value_for(position, current_player)
+  end
+
   private
 
   def board
