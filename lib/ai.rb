@@ -57,6 +57,11 @@ class Ai
     board.set_value_for(5, current_player)
   end
 
+  def make_random_move
+    position = board.available_moves.sample
+    board.set_value_for(position, current_player)
+  end
+
   private
 
   def board

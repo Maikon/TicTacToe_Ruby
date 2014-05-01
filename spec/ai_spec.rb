@@ -129,4 +129,15 @@ describe Ai do
     end
   end
 
+  context '#make_random_move' do
+    it 'marks a random cell' do
+      fill_cell(1, opponent.mark)
+      fill_cell(5, current_player.mark)
+      fill_cell(9, opponent.mark)
+      fill_cell(2, current_player.mark)
+      fill_cell(8, opponent.mark)
+      expect(board).to receive(:set_value_for)
+      ai.make_random_move
+    end
+  end
 end
