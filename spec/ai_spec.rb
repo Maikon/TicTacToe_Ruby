@@ -92,4 +92,14 @@ describe Ai do
     end
   end
 
+  context '#block_diagonal_trap' do
+    it 'counters possible diagonal trap' do
+      fill_cell(1, opponent.mark)
+      fill_cell(5, opponent.mark)
+      fill_cell(9, current_player.mark)
+      expect(board).to receive(:set_value_for).with(7, 'O')
+      ai.block_diagonal_trap
+    end
+  end
+
 end
