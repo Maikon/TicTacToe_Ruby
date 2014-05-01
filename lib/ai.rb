@@ -49,6 +49,10 @@ class Ai
     board.set_value_for(position, current_player)
   end
 
+  def set_diagonal_trap
+    board.set_value_for(diagonal_move.first, current_player)
+  end
+
   private
 
   def board
@@ -89,5 +93,14 @@ class Ai
   def move_available?(player)
     position_to_move_depends_on(player).empty? ? false : true
   end
+
+  def diagonal_move
+    board.diagonals.select { |d| d.count(opponent) == 1 }
+                   .flatten
+                   .grep(Fixnum)
+  end
+
+  def check_diagonal
+    diagonal_move.empty? ? false : true
   end
 end

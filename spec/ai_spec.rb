@@ -112,4 +112,13 @@ describe Ai do
     end
   end
 
+  context '#set_diagonal_trap' do
+    it 'sets a trap for the opponent' do
+      fill_cell(1, opponent.mark)
+      fill_cell(5, current_player.mark)
+      expect(board).to receive(:set_value_for).with(9, 'O')
+      ai.set_diagonal_trap
+    end
+  end
+
 end
