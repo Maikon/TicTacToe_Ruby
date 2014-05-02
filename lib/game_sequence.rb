@@ -18,7 +18,21 @@ class GameSequence
     name
   end
 
+  def get_mark
+    output.puts "Choose your mark: 'X' or 'O'"
+    mark = get_input
+    until_these_match(mark, /^[x,|X|o|O]$/) { "Choose your mark: 'X' or 'O'" }
+    mark
+  end
+
   private
+
+  def until_these_match(data, condition, &block)
+    until data.match(condition)
+      output.puts yield
+      data = get_input
+    end
+  end
 
   def get_input
     input.gets.chomp.capitalize

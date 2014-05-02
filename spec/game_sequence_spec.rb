@@ -29,4 +29,11 @@ describe GameSequence do
     end
   end
 
+  context '#get_mark' do
+    it 'gets the mark from the player' do
+      game.output.stub(:puts) { "Choose your mark: 'X' or 'O'" }
+      game.input.stub(:gets) { 'x' }
+      expect(game.get_mark).to eq 'X'
+    end
+  end
 end
