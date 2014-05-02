@@ -16,32 +16,40 @@ describe GameSequence do
 
   context '#greet_player' do
     it 'prints a greeting message' do
-      game.output.stub(:puts) { 'Welcome to Tic Tac Toe.' }
+      expect(game.output).to receive(:puts).with('Welcome to Tic Tac Toe.')
       game.greet_player
     end
   end
 
-  context '#get_name' do
+  context '#choose_name' do
     it 'asks the user for the name' do
-      game.output.stub(:puts) { 'What shall I call you today?' }
+      expect(game.output).to receive(:puts).with('What shall I call you today?')
       game.input.stub(:gets) { 'joe' }
-      expect(game.get_name).to eq 'Joe'
+      expect(game.choose_name).to eq 'Joe'
     end
   end
 
-  context '#get_mark' do
+  context '#choose_mark' do
     it 'gets the mark from the player' do
-      game.output.stub(:puts) { "Choose your mark: 'X' or 'O'" }
+      expect(game.output).to receive(:puts).with("Choose your mark: 'X' or 'O'")
       game.input.stub(:gets) { 'x' }
-      expect(game.get_mark).to eq 'X'
+      expect(game.choose_mark).to eq 'X'
     end
   end
 
   context '#choose_turn' do
     it 'gets and returns the input from the user choosing who goes first' do
-      game.output.stub(:puts) { 'Who would you like to go first: 1) You or 2) Computer' }
+      expect(game.output).to receive(:puts).with('Who would you like to go first: 1) You or 2) Computer')
       game.input.stub(:gets) { '1' }
       expect(game.choose_turn).to eq '1'
+    end
+  end
+
+  context '#choose_move' do
+    it 'gets and returns the move the user chooses' do
+      expect(game.output).to receive(:puts).with('Please choose a move from the board:')
+      game.input.stub(:gets) { '2' }
+      expect(game.choose_move).to eq 2
     end
   end
 end

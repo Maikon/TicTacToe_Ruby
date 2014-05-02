@@ -12,13 +12,13 @@ class GameSequence
     output.puts 'Welcome to Tic Tac Toe.'
   end
 
-  def get_name
+  def choose_name
     output.puts 'What shall I call you today?'
     name = get_input
     name
   end
 
-  def get_mark
+  def choose_mark
     output.puts "Choose your mark: 'X' or 'O'"
     mark = get_input
     until_these_match(mark, /^[x,|X|o|O]$/, &ask_for_mark)
@@ -28,6 +28,12 @@ class GameSequence
     output.puts 'Who would you like to go first: 1) You or 2) Computer'
     choice = get_input
     until_these_match(choice, /^[1|2]$/, &ask_for_number)
+  end
+
+  def choose_move
+    output.puts 'Please choose a move from the board:'
+    move = get_input.to_i
+    move
   end
 
   private
