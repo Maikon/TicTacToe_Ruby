@@ -4,20 +4,19 @@ require 'game_interface'
 require 'spec_helper'
 
 describe Ai do
-  let(:ai)             { Ai.new }
-  let(:board)          { Board.new }
   let(:current_player)       { double :computer, mark: 'O' }
-  let(:opponent)       { double :human, mark: 'X' }
-  let(:game_interface) { GameInterface.new(board, opponent) }
+  let(:opponent)             { double :human, mark: 'X' }
+  let(:ai)                   { Ai.new }
+  let(:board)                { Board.new }
+  let(:game_interface)       { GameInterface.new(board, opponent) }
+
+  it 'operates on a given game interface' do
+    ai.choose_interface(game_interface)
+    expect(ai.interface).to eq game_interface
+  end
 
   before(:each) do
     ai.choose_interface(game_interface)
-  end
-
-  context '#choose_interface' do
-    it 'operates on a given game interface' do
-      expect(ai.interface).to eq game_interface
-    end
   end
 
   context '#winning_spot_available?' do
