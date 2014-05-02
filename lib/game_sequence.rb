@@ -21,20 +21,34 @@ class GameSequence
   def get_mark
     output.puts "Choose your mark: 'X' or 'O'"
     mark = get_input
-    until_these_match(mark, /^[x,|X|o|O]$/) { "Choose your mark: 'X' or 'O'" }
-    mark
+    until_these_match(mark, /^[x,|X|o|O]$/, &ask_for_mark)
+  end
+
+  def choose_turn
+    output.puts 'Who would you like to go first: 1) You or 2) Computer'
+    choice = get_input
+    until_these_match(choice, /^[1|2]$/, &ask_for_number)
   end
 
   private
 
-  def until_these_match(data, condition, &block)
+  def until_these_match(data, condition)
     until data.match(condition)
-      output.puts yield
+      yield
       data = get_input
     end
+    data
   end
 
   def get_input
     input.gets.chomp.capitalize
+  end
+
+  def ask_for_mark
+    Proc.new { output.puts 'Please choose X or O:' }
+  end
+
+  def ask_for_number
+    Proc.new { output.puts 'Please choose 1 or 2:' }
   end
 end

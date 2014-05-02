@@ -36,4 +36,12 @@ describe GameSequence do
       expect(game.get_mark).to eq 'X'
     end
   end
+
+  context '#choose_turn' do
+    it 'gets and returns the input from the user choosing who goes first' do
+      game.output.stub(:puts) { 'Who would you like to go first: 1) You or 2) Computer' }
+      game.input.stub(:gets) { '1' }
+      expect(game.choose_turn).to eq '1'
+    end
+  end
 end
