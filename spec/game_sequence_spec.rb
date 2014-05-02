@@ -48,6 +48,7 @@ describe GameSequence do
   context '#choose_move' do
     it 'gets and returns the move the user chooses' do
       expect(game.output).to receive(:puts).with('Please choose a move from the board:')
+      expect(board).to receive(:available_moves).and_return([2])
       game.input.stub(:gets) { '2' }
       expect(game.choose_move).to eq 2
     end
