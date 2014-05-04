@@ -6,7 +6,7 @@ class Ai
   end
 
   def winning_spot_available?
-    move_available?(current_player)
+    move_exists_for?(computer)
   end
 
   def board_center_available?
@@ -14,52 +14,58 @@ class Ai
   end
 
   def possible_loss?
-    move_available?(opponent)
+    move_exists_for?(human_opponent)
   end
 
   def diagonal_trap_being_set?
-    check_diagonal_formation(opponent)
+    check_diagonal_formation(human_opponent)
   end
 
   def alternative_diagonal_trap_being_set?
-    check_alternative_diagonal_formation(opponent)
+    check_alternative_diagonal_formation(human_opponent)
   end
 
   def opportunity_to_set_trap_exists?
     check_diagonal
   end
 
-  def mark_winning_spot
-    position = position_to_move_depends_on(current_player).first
-    board.set_value_for(position, current_player)
+  def edges_trap_being_set?
+    board.edges.count(human_opponent) == 2
   end
 
-  def block_opponent_winning_spot
-    position = position_to_move_depends_on(opponent).first
-    board.set_value_for(position, current_player)
+  def mark_winning_spot
+    position = position_to_move_depends_on(computer).first
+    board.set_value_for(position, computer)
+  end
+
+  def block_human_opponent_winning_spot
+    position = position_to_move_depends_on(human_opponent).first
+    board.set_value_for(position, computer)
   end
 
   def block_diagonal_trap
     position = board.diagonals.flatten.grep(Fixnum).first
-    board.set_value_for(position, current_player)
+    board.set_value_for(position, computer)
   end
 
   def block_alternative_diagonal_trap
     position = board.edges.first
-    board.set_value_for(position, current_player)
+    board.set_value_for(position, computer)
   end
 
   def set_diagonal_trap
-    board.set_value_for(diagonal_move.first, current_player)
+    board.set_value_for(diagonal_move.first, computer)
   end
 
   def mark_center
-    board.set_value_for(5, current_player)
+    board.set_value_for(5, computer)
   end
 
   def make_random_move
     position = board.available_moves.sample
-    board.set_value_for(position, current_player)
+    board.set_value_for(position, computer)
+  end
+
   end
 
   def make_best_move
@@ -78,11 +84,11 @@ class Ai
     interface.board
   end
 
-  def current_player
+  def computer
     interface.player.mark == 'X' ? 'O' : 'X'
   end
 
-  def opponent
+  def human_opponent
     interface.player.mark
   end
 
@@ -109,12 +115,12 @@ class Ai
     option.grep(Fixnum)
   end
 
-  def move_available?(player)
+  def move_exists_for?(player)
     position_to_move_depends_on(player).empty? ? false : true
   end
 
   def diagonal_move
-    board.diagonals.select { |d| d.count(opponent) == 1 }
+    board.diagonals.select { |d| d.count(human_opponent) == 1 }
                    .flatten
                    .grep(Fixnum)
   end
