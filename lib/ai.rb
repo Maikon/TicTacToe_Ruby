@@ -66,12 +66,15 @@ class Ai
     board.set_value_for(position, computer)
   end
 
+  def block_edges_trap
+    board.set_value_for(edges_move.first, computer)
   end
 
   def make_best_move
-    return mark_center if board_center_available?
     return mark_winning_spot if winning_spot_available?
-    return block_opponent_winning_spot if possible_loss?
+    return block_human_opponent_winning_spot if possible_loss?
+    return block_edges_trap if edges_trap_being_set?
+    return mark_center if board_center_available?
     return block_diagonal_trap if diagonal_trap_being_set?
     return block_alternative_diagonal_trap if alternative_diagonal_trap_being_set?
     return set_diagonal_trap if opportunity_to_set_trap_exists?
@@ -123,6 +126,12 @@ class Ai
     board.diagonals.select { |d| d.count(human_opponent) == 1 }
                    .flatten
                    .grep(Fixnum)
+  end
+
+  def edges_move
+    board.rows.select { |r| r.include?(human_opponent) }
+              .flatten
+              .grep(Fixnum)
   end
 
   def check_diagonal
