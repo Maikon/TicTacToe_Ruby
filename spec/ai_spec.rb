@@ -152,8 +152,10 @@ describe Ai do
 
   context '#block_edges_trap' do
     it 'blocks possible edges trap by marking a diagonal next to the edge' do
-      fill_cell(2, human_opponent.mark)
-      expect(board).to receive(:set_value_for).with(1, 'O')
+      fill_cell(8, human_opponent.mark)
+      fill_cell(5, computer.mark)
+      fill_cell(6, human_opponent.mark)
+      expect(board).to receive(:set_value_for).with(7, 'O')
       ai.block_edges_trap
     end
   end

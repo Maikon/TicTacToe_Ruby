@@ -129,7 +129,8 @@ class Ai
   end
 
   def edges_move
-    board.rows.select { |r| r.include?(human_opponent) }
+    first_and_last = board.rows.first, board.rows.last
+    first_and_last.select { |r| r.include?(human_opponent) }
               .flatten
               .grep(Fixnum)
   end
