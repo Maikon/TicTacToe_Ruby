@@ -30,6 +30,12 @@ class GameInterface
     check_for_conditions(get_input, /^[1|2]$/, &ask_for_number)
   end
 
+  def choose_move
+    output.puts "Ok #{player.name}, choose a move from the board:"
+    move = get_input.to_i
+    available_moves_include(move)
+  end
+
   private
 
   def check_for_conditions(some_input, condition)
@@ -53,5 +59,11 @@ class GameInterface
     input.gets.chomp.to_s.capitalize
   end
 
+  def available_moves_include(move)
+    until board.available_moves.include?(move)
+      output.puts 'Please choose a valid move:'
+      move = get_input.to_i
+    end
+    move
   end
 end

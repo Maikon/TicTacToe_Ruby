@@ -49,4 +49,14 @@ describe GameInterface do
     end
   end
 
+  context '#choose_move' do
+    it 'gets and returns the move the user chooses' do
+      expect(interface.output).to receive(:puts).with('Ok Joe, choose a move from the board:')
+      expect(board_mock).to receive(:available_moves).and_return([2])
+      expect(opponent).to receive(:name).and_return('Joe')
+      interface.input.stub(:gets) { '2' }
+      expect(interface.choose_move).to eq 2
+    end
+  end
+
 end
