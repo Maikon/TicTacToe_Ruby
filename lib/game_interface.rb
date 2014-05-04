@@ -14,5 +14,17 @@ class GameInterface
     output.puts '-----------------------'
   end
 
+  def choose_name
+    output.puts 'What shall I call you today?'
+    name = get_input
+    name
+  end
+
+  private
+
+  def get_input
+    input.gets.chomp.to_s.capitalize
+  end
+
   end
 end

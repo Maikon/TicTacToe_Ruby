@@ -1,6 +1,7 @@
 require 'stringio'
 require 'game_sequence'
 require 'game_interface'
+require 'ai'
 
 describe GameSequence do
   let(:human)     { double :human }
@@ -13,22 +14,6 @@ describe GameSequence do
     expect(game.interface).to eq gi
     expect(game.ai).to eq computer
   end
-
-  context '#greet_player' do
-    it 'prints a greeting message' do
-      expect(game.output).to receive(:puts).with('Welcome to Tic Tac Toe.')
-      game.greet_player
-    end
-  end
-
-  context '#choose_name' do
-    it 'asks the user for the name' do
-      expect(game.output).to receive(:puts).with('What shall I call you today?')
-      game.input.stub(:gets) { 'joe' }
-      expect(game.choose_name).to eq 'Joe'
-    end
-  end
-
   context '#choose_mark' do
     it 'gets the mark from the player' do
       expect(game.output).to receive(:puts).with("Choose your mark: 'X' or 'O'")

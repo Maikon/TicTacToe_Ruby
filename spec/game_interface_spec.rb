@@ -24,4 +24,13 @@ describe GameInterface do
       interface.greet_player
     end
   end
+
+  context '#choose_name' do
+    it 'asks the user for the name' do
+      expect(interface.output).to receive(:puts).with('What shall I call you today?')
+      interface.input.stub(:gets) { 'joe' }
+      expect(interface.choose_name).to eq 'Joe'
+    end
+  end
+
 end
