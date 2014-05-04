@@ -33,4 +33,20 @@ describe GameInterface do
     end
   end
 
+  context '#choose_mark' do
+    it 'gets the mark from the player' do
+      expect(interface.output).to receive(:puts).with("Choose your mark: 'X' or 'O'")
+      interface.input.stub(:gets) { 'x' }
+      expect(interface.choose_mark).to eq 'X'
+    end
+  end
+
+  context '#choose_turn' do
+    it 'gets and returns the input from the user choosing who goes first' do
+      expect(interface.output).to receive(:puts).with('Who would you like to go first: 1) You or 2) Computer')
+      interface.input.stub(:gets) { '1' }
+      expect(interface.choose_turn).to eq '1'
+    end
+  end
+
 end
