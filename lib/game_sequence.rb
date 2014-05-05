@@ -1,72 +1,66 @@
 class GameSequence
-  attr_reader :interface, :ai, :output, :input
+  attr_reader :ai
 
-  def initialize(interface, ai)
-    @interface = interface
+  SPACING = '-' * 25
+
+  def initialize(ai)
     @ai = ai
-    @output = $stdout
-    @input = $stdin
   end
 
-  def greet_player
-    output.puts 'Welcome to Tic Tac Toe.'
-  end
-
-  def choose_name
-    output.puts 'What shall I call you today?'
-    name = get_input
-    name
-  end
-
-  def choose_mark
-    output.puts "Choose your mark: 'X' or 'O'"
-    mark = get_input
-    until_these_match(mark, /^[x|X|o|O]$/, &ask_for_mark)
-  end
-
-  def choose_turn
-    output.puts 'Who would you like to go first: 1) You or 2) Computer'
-    choice = get_input
-    until_these_match(choice, /^[1|2]$/, &ask_for_number)
-  end
-
-  def choose_move
-    output.puts 'Please choose a move from the board:'
-    move = get_input.to_i
-    available_moves_include(move)
+  def start
+    if ai.interface.choose_turn == '1'
+      board.show
+      human_makes_a_move
+    else
+      computer_makes_a_move
+    end
+    puts SPACING
+    puts "#{message}"
+    another_round
   end
 
   private
 
-  def until_these_match(data, condition)
-    until data.match(condition)
-      yield
-      data = get_input
+  def human_makes_a_move
+    unless board.winner? || board.draw?
+      move = ai.interface.choose_move
+      board.set_value_for(move, human.mark)
+      puts SPACING
+      board.show
+      computer_makes_a_move
     end
-    data
   end
 
-  def get_input
-    input.gets.chomp.capitalize
+  def computer_makes_a_move
+    unless board.winner? || board.draw?
+      ai.make_best_move
+      puts SPACING
+      puts 'Computer made its move:'
+      board.show
+      human_makes_a_move
+    end
   end
 
-  def ask_for_mark
-    Proc.new { output.puts 'Please choose X or O:' }
+  def message
+    board.winner? ? 'Tough luck, the computer won.' : "It's a draw."
   end
 
-  def ask_for_number
-    Proc.new { output.puts 'Please choose 1 or 2:' }
+  def another_round
+    puts "Would you like to play again? Press 'y' to do so or any other key to quit."
+    answer = gets.chomp
+    if answer.match(/\b(y)\b/)
+      system("clear; ruby #{File.expand_path File.dirname(__FILE__)}/run.rb")
+    else
+      puts SPACING
+      puts 'Have an awesome day/night!'
+    end
   end
 
   def board
-    @interface.board
+    ai.interface.board
   end
 
-  def available_moves_include(move)
-    until board.available_moves.include?(move)
-      output.puts 'Please choose a valid move:'
-      move = get_input.to_i
-    end
-    move
+  def human
+    ai.interface.player
   end
 end
