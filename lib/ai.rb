@@ -131,8 +131,8 @@ class Ai
   def edges_move
     first_and_last = board.rows.first, board.rows.last
     first_and_last.select { |r| r.include?(human_opponent) }
-              .flatten
-              .grep(Fixnum)
+                  .flatten
+                  .grep(Fixnum)
   end
 
   def check_diagonal

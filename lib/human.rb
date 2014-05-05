@@ -1,5 +1,5 @@
 class Human
-  attr_reader :name, :mark, :move
+  attr_reader :name, :mark
 
   def set_name(name)
     @name = name
@@ -7,9 +7,5 @@ class Human
 
   def set_mark(mark)
     @mark = mark
-  end
-
-  def choose_move(move)
-    @move = move
   end
 end

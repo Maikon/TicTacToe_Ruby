@@ -18,11 +18,4 @@ describe Human do
       expect(human.mark).to eq 'X'
     end
   end
-
-  context '#choose_move' do
-    it 'returns the choice of move of the player' do
-      human.choose_move(5)
-      expect(human.move).to eq 5
-    end
-  end
 end
