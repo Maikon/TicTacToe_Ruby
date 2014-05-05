@@ -36,6 +36,11 @@ class GameInterface
     available_moves_include(move)
   end
 
+  def set_human_attributes
+    player.set_name(choose_name)
+    player.set_mark(choose_mark)
+  end
+
   private
 
   def check_for_conditions(some_input, condition)
@@ -48,11 +53,11 @@ class GameInterface
   end
 
   def ask_for_mark
-    Proc.new { output.puts 'Please choose X or O:' }
+    -> { output.puts 'Please choose X or O:' }
   end
 
   def ask_for_number
-    lambda { output.puts 'Please choose 1 or 2:' }
+    -> { output.puts 'Please choose 1 or 2:' }
   end
 
   def get_input

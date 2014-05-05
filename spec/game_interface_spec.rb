@@ -58,5 +58,4 @@ describe GameInterface do
       expect(interface.choose_move).to eq 2
     end
   end
-
 end
