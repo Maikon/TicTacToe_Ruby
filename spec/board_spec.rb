@@ -90,4 +90,46 @@ describe Board do
       expect(board.draw?).to eq true
     end
   end
+
+  context '#reset_value_for' do
+    it 'resets the value for the given cell' do
+      fill_cell(1, 'X')
+      expect(board.grid).to eq ['X', 2, 3,
+                                 4, 5, 6,
+                                 7, 8, 9]
+      board.reset_value_for(1)
+      expect(board.grid).to eq [1, 2, 3,
+                                4, 5, 6,
+                                7, 8, 9]
+    end
+  end
+
+  context '#win_for?' do
+    it 'returns true if the given player has won' do
+      fill_cell(1, 'X')
+      fill_cell(2, 'O')
+      fill_cell(4, 'X')
+      fill_cell(5, 'O')
+      expect(board.win_for?('X')).to eq false
+      fill_cell(7, 'X')
+      expect(board.win_for?('X')).to eq true
+    end
+  end
+
+  context '#set_turn' do
+    it 'sets the mark that goes first' do
+      expect(board.current_player).to eq nil
+      board.set_turn('O')
+      expect(board.current_player).to eq 'O'
+    end
+  end
+
+  context '#change_turn' do
+    it 'changes the turn by setting the mark that goes next' do
+      board.set_turn('O')
+      expect(board.current_player).to eq 'O'
+      board.change_turn
+      expect(board.current_player).to eq 'X'
+    end
+  end
 end

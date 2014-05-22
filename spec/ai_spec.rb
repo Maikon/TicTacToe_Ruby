@@ -6,9 +6,10 @@ require 'spec_helper'
 describe Ai do
   let(:computer)             { double :computer, mark: 'O' }
   let(:human_opponent)       { double :human, mark: 'X' }
+  let(:cpu)                  { double }
   let(:ai)                   { Ai.new }
   let(:board)                { Board.new }
-  let(:game_interface)       { GameInterface.new(board, human_opponent) }
+  let(:game_interface)       { GameInterface.new(board, human_opponent, cpu) }
 
   it 'operates on a given game interface' do
     ai.choose_interface(game_interface)

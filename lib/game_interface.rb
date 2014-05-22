@@ -1,11 +1,12 @@
 class GameInterface
-  attr_reader :board, :player, :output, :input
+  attr_reader :board, :player, :computer, :output, :input
 
-  def initialize(board, player)
+  def initialize(board, player, computer, output = $stdout, input = $stdin)
     @board = board
     @player = player
-    @output = $stdout
-    @input = $stdin
+    @computer = computer
+    @output = output
+    @input = input
   end
 
   def greet_player

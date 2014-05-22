@@ -1,5 +1,5 @@
 class Board
-  attr_reader :grid
+  attr_reader :grid, :current_player
 
   def initialize
     @grid = (1..9).to_a
@@ -26,7 +26,17 @@ class Board
   end
 
   def set_value_for(position, value)
-    grid.include?(position) ? grid[position - 1] = value : false
+    if grid.include?(position)
+      grid[position - 1] = value
+      change_turn
+    else
+      false
+    end
+  end
+
+  def reset_value_for(position)
+    grid[position -1] = position
+    change_turn
   end
 
   def available_moves
@@ -38,7 +48,19 @@ class Board
   end
 
   def draw?
-    available_moves.empty?
+    available_moves.empty? && !winner?
+  end
+
+  def win_for?(mark)
+    winning_combinations.any? { |combo| combo.all? { |cell| cell == mark } }
+  end
+
+  def set_turn(mark)
+    @current_player = mark
+  end
+
+  def change_turn
+    current_player == 'X' ? @current_player = 'O' : @current_player = 'X'
   end
 
   def show
