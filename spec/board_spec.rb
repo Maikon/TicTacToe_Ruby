@@ -104,6 +104,17 @@ describe Board do
     end
   end
 
+  context '#win_for?' do
+    it 'returns true if the given player has won' do
+      fill_cell(1, 'X')
+      fill_cell(2, 'O')
+      fill_cell(4, 'X')
+      fill_cell(5, 'O')
+      expect(board.win_for?('X')).to eq false
+      fill_cell(7, 'X')
+      expect(board.win_for?('X')).to eq true
+    end
+  end
 
   context '#set_turn' do
     it 'sets the mark that goes first' do

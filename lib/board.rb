@@ -26,7 +26,13 @@ class Board
   end
 
   def set_value_for(position, value)
-    grid.include?(position) ? grid[position - 1] = value : false
+    if grid.include?(position)
+      grid[position - 1] = value
+      change_turn
+    else
+      false
+    end
+  end
 
   def reset_value_for(position)
     grid[position -1] = position
@@ -45,6 +51,9 @@ class Board
     available_moves.empty? && !winner?
   end
 
+  def win_for?(mark)
+    winning_combinations.any? { |combo| combo.all? { |cell| cell == mark } }
+  end
 
   def set_turn(mark)
     @current_player = mark
