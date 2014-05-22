@@ -1,17 +1,19 @@
 class GameSequence
-  attr_reader :ai
+  attr_reader :gi
 
   SPACING = '-' * 25
 
-  def initialize(ai)
-    @ai = ai
+  def initialize(gi)
+    @gi = gi
   end
 
   def start
-    if ai.interface.choose_turn == '1'
+    if gi.choose_turn == '1'
       board.show
+      gi.board.set_turn(human.mark)
       human_makes_a_move
     else
+      gi.board.set_turn(computer.mark)
       computer_makes_a_move
     end
     puts SPACING
@@ -23,7 +25,7 @@ class GameSequence
 
   def human_makes_a_move
     unless board.winner? || board.draw?
-      move = ai.interface.choose_move
+      move = gi.choose_move
       board.set_value_for(move, human.mark)
       puts SPACING
       board.show
@@ -33,7 +35,7 @@ class GameSequence
 
   def computer_makes_a_move
     unless board.winner? || board.draw?
-      ai.make_best_move
+      gi.computer.make_move(board)
       puts SPACING
       puts 'Computer made its move:'
       board.show
@@ -56,11 +58,17 @@ class GameSequence
     end
   end
 
+  private
+
   def board
-    ai.interface.board
+    gi.board
   end
 
   def human
-    ai.interface.player
+    gi.player
+  end
+
+  def computer
+    gi.computer
   end
 end
